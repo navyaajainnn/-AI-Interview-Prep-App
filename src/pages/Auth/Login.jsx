@@ -34,6 +34,24 @@ const Login=({setCurrentPage})=>{
             placeholder="Min 8 characters"
             type="password"
             />
+
+            {error && <p className="text-red-500 text-xs pb-2.5">{error}</p>}
+
+            <button type="submit" className="btn-primary">
+                LOGIN 
+            </button>   
+
+            <p className="text-[13px] text-slate-800">
+                Don't have an account? {""}
+                <button
+                className="font-medium text-primary underline cursor-pointer"
+                onClick={()=>{
+                    setCurrentPage("signup");
+                }}
+                >
+
+                </button>
+                </p> 
         </form>
     </div>
 };
