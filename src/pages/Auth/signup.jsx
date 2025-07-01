@@ -12,8 +12,7 @@ const SignUp=({setCurrentPage})=>{
     
     const [error, setError] = useState(null);
 
-    const navigate=useNagivate();
-
+    const navigate = useNavigate(); 
     //Handle signup form submit
     const handleSignUp = async (e) => {
         e.preventDefault();
