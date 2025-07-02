@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import home from "../assets/home.png";
 import Login from "./Auth/Login";
-import SignUp from "./Auth/signup";
+import SignUp from "./Auth/SignUp"; // Make sure the filename matches
 import { APP_FEATURES } from "../utils/data";
-import { useNavigate } from "react-router-dom";
 import { LuSparkles } from "react-icons/lu";
 import Modal from "../components/Modals";
 
 const LandingPage = () => {
-  const navigate = useNavigate();
-
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const [currentPage, setCurrentPage] = useState("login");
 
-  const handleCTA = () => {};
+  const handleCTA = () => {
+    setOpenAuthModal(true);
+    setCurrentPage("signup"); // Direct CTA to SignUp
+  };
 
   return (
     <>
@@ -23,10 +23,13 @@ const LandingPage = () => {
           <header className="flex justify-between items-center mb-16">
             <div className="text-xl text-black font-bold">Interview Prep AI</div>
             <button
-              className="bg-linear-to-r from-[#FF9324] to-[#e99a4b] text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-black hover:text-white border border-white transition-colors cursor-pointer"
-              onClick={() => setOpenAuthModal(true)}
+              className="bg-gradient-to-r from-[#FF9324] to-[#e99a4b] text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-black hover:text-white border border-white transition-colors cursor-pointer"
+              onClick={() => {
+                setOpenAuthModal(true);
+                setCurrentPage("login");
+              }}
             >
-              Login/ Sign Up
+              Login / Sign Up
             </button>
           </header>
 
@@ -50,8 +53,7 @@ const LandingPage = () => {
               <p className="text-[17px] text-gray-900 mr-0 md:mr-20 mb-6">
                 Get role-specific questions, expand answers when you need them,
                 dive deeper into concepts, and organize everything your way.
-                From preparation to mastery - your ultimate interview toolkit is 
-                here.
+                From preparation to mastery — your ultimate interview toolkit is here.
               </p>
 
               <button
@@ -66,26 +68,23 @@ const LandingPage = () => {
       </div>
 
       <div className="w-full min-h-full relative z-10">
-        <div>
-          <section className="flex items-center justify-center -mt-36">
-            <img
-              src={home}
-              alt="home img"
-              className="w-[800px] rounded-lg"
-            />
-          </section>
-        </div>
+        <section className="flex items-center justify-center -mt-36">
+          <img
+            src={home}
+            alt="Hero illustration for landing page"
+            className="w-[800px] rounded-lg"
+          />
+        </section>
       </div>
 
       <div className="w-full min-h-full bg-[#FFFCEF] mt-10">
         <div className="container mx-auto px-4 pt-10 pb-20">
           <section className="mt-5">
-            <h2 className="text-2xl font-medium text-center mb-12 ">
+            <h2 className="text-2xl font-medium text-center mb-12">
               Features That Make You Shine
             </h2>
 
             <div className="flex flex-col items-center gap-8">
-              {/* First 3 cards */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
                 {APP_FEATURES.slice(0, 3).map((feature) => (
                   <div
@@ -130,14 +129,12 @@ const LandingPage = () => {
         }}
         hideHeader
       >
-        <div>
-          {currentPage === "login" && (
-            <Login setCurrentPage={setCurrentPage} />
-          )}
-          {currentPage === "signup" && (
-            <SignUp setCurrentPage={setCurrentPage} />
-          )}
-        </div>
+        {currentPage === "login" && (
+          <Login setCurrentPage={setCurrentPage} />
+        )}
+        {currentPage === "signup" && (
+          <SignUp setCurrentPage={setCurrentPage} />
+        )}
       </Modal>
     </>
   );
